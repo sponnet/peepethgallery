@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Come take a peep!</title>
+<link rel="stylesheet" href="justifiedGallery.min.css" />
+<script src="jquery-3.3.1.min.js"></script>
+<script src="jquery.justifiedGallery.min.js"></script>
+</head>
+<body>
+<div id="mygallery">
+</div>
+<script>
+	$(function() {
+		var ld;
+		$.ajax({
+			url: "https://ipfs.io/ipfs/QmcTzqv6rHMWxRMxN9WSi8VGxfA1q9umBPRMn7Q8Y4usiq",
+			success: function(result) {
+				let pd = JSON.parse(result);
+				pd.forEach((pic) => {
+					var div = $("<a href=\"https://ipfs.io/ipfs/" + pic.img + "\"><img src=\"https://ipfs.io/ipfs/" + pic.tn + "\"/></a>");
+					ld = pic.tn;
+					$("#mygallery").prepend(div);
+				});
+				$("#mygallery").justifiedGallery({
+					rowHeight: 70,
+					lastRow: 'justify',
+					margins: 3
+				});
+			}
+		});
+	});
+</script>
+</body>
+</html>
